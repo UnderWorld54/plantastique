@@ -3,7 +3,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Angel\\App\\": "src/"
+            "Framework\\": "framework/",
+            "App\\": "src/"
         }
     },
     "authors": [
