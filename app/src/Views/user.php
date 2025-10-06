@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title) ?></title>
-</head>
-<body>
-    <div class="container">
-        <h1><?= htmlspecialchars($title) ?></h1>
-        <div class="message">
-            Hello <?= htmlspecialchars($id) ?> !
-        </div>
+<div class="user-profile">
+    <h2>Profil Utilisateur</h2>
+    <div class="user-info">
+        <p>Bonjour utilisateur <strong><?= $this->escape($id) ?></strong> !</p>
+        <p>Bienvenue dans votre espace personnel.</p>
     </div>
-</body>
-</html>
+</div>

@@ -18,6 +18,11 @@ abstract class Controller
         return $this->response->view($view, $data);
     }
 
+    protected function viewWithLayout(string $view, array $data = [], string $layout = 'layout'): Response
+    {
+        return $this->response->viewWithLayout($view, $data, $layout);
+    }
+
     protected function json(array $data, int $statusCode = 200): Response
     {
         return $this->response->json($data, $statusCode);

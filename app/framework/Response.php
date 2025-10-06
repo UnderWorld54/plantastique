@@ -41,6 +41,13 @@ class Response
         return $this;
     }
 
+    public function viewWithLayout(string $view, array $data = [], string $layout = 'layout'): self
+    {
+        $this->setHeader('Content-Type', 'text/html');
+        $this->setContent($this->renderViewWithLayout($view, $data, $layout));
+        return $this;
+    }
+
     public function redirect(string $url, int $statusCode = 302): self
     {
         $this->setStatusCode($statusCode);
@@ -63,6 +70,13 @@ class Response
         }
         
         return ob_get_clean();
+    }
+
+    // Rendu avec le layout
+    private function renderViewWithLayout(string $view, array $data = [], string $layout = 'layout'): string
+    {
+        $template = new Template();
+        return $template->layout($layout)->with($data)->render($view, $data);
     }
 
     public function send(): void

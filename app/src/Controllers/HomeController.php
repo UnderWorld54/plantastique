@@ -8,9 +8,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return $this->view('home', [
+        return $this->viewWithLayout('home', [
             'title' => 'Plantastique',
-            'message' => 'Hello World!',
+            'message' => 'Bienvenue sur notre application de gestion de plantes !',
+            'siteTitle' => 'Plantastique - Le réseau social des plantes éveillées'
         ]);
     }
+
 }

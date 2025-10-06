@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title) ?></title>
-</head>
-<body>
-    <div class="container">
-        <h1><?= htmlspecialchars($title) ?></h1>
-        <div class="message">
-            <?= htmlspecialchars($message) ?>
-        </div>
+<div class="welcome">
+    <h2>Bienvenue sur <?= $this->escape($title) ?></h2>
+    <div class="message">
+        <p><?= $this->escape($message) ?></p>
     </div>
-</body>
-</html>
+</div>
