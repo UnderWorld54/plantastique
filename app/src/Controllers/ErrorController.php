@@ -11,7 +11,7 @@ class ErrorController extends Controller
         http_response_code(404);
         return $this->view('errors/404', [
             'title' => "Hehehe tu t'es perdu...",
-            'message' => 'Va te faire voir ailleurs que chez moi ! 😡',
+            'message' => "Cette page n'existe pas",
         ]);
     }
 }
