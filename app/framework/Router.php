@@ -36,6 +36,12 @@ class Router
             'middlewares' => $middlewares
         ];
     }
+    
+    private function convertToRegex(string $path): string
+    {
+        $pattern = preg_replace('/\{([^}]+)\}/', '(?P<$1>[^/]+)', $path);
+        return '#^' . $pattern . '$#';
+    }
 
     public function dispatch(string $method, string $uri): array
     {
@@ -64,13 +70,11 @@ class Router
             }
         }
 
-        throw new \Exception("Route not found: {$method} {$uri}");
-    }
-
-    private function convertToRegex(string $path): string
-    {
-        $pattern = preg_replace('/\{([^}]+)\}/', '(?P<$1>[^/]+)', $path);
-        return '#^' . $pattern . '$#';
+        return [
+            'handler' => 'ErrorController@notFound',
+            'params' => [],
+            'middlewares' => []
+        ];
     }
 
     public function middleware(string $name, callable $middleware): void
