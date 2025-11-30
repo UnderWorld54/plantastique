@@ -13,20 +13,20 @@ class Database
     {
         if (self::$connection === null) {
             try {
-                $host = $_ENV['DB_HOST'];
-                $port = $_ENV['DB_PORT'];
-                $dbname = $_ENV['DB_NAME'];
-                $user = $_ENV['DB_USER'];
-                $password = $_ENV['DB_PASSWORD'];
+                $host = getenv('DB_HOST') ?: $_ENV['DB_HOST'] ?? null;
+                $port = getenv('DB_PORT') ?: $_ENV['DB_PORT'] ?? null;
+                $dbname = getenv('DB_NAME') ?: $_ENV['DB_NAME'] ?? null;
+                $user = getenv('DB_USER') ?: $_ENV['DB_USER'] ?? null;
+                $password = getenv('DB_PASSWORD') ?: $_ENV['DB_PASSWORD'] ?? null;
 
-                $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+                $dsn = "mysql:host=$host;port=$port;dbname=$dbname";
                 self::$connection = new PDO($dsn, $user, $password, [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES => false,
                 ]);
             } catch (PDOException $e) {
-                die("Database connection failed: " . $e->getMessage());
+                throw new \Exception("Database connection failed: " . $e->getMessage());
             }
         }
 
@@ -52,7 +52,7 @@ class Database
             $stmt = $pdo->prepare($sql);
             $stmt->execute($data);
             $result = $stmt->fetch();
-            return $result['id'] ?? false;
+            return (int) $pdo->lastInsertId();
         } catch (PDOException $e) {
             error_log("Database create error: " . $e->getMessage());
             return false;

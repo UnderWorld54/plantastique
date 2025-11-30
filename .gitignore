@@ -1,4 +1,5 @@
 .env
+app/.env
 vendor/
 nginx/ssl
 node_modules/
