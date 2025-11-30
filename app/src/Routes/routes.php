@@ -14,6 +14,9 @@ $router->get('/users', 'UserController@list');
 $router->get('/post/{id}', 'PostController@show');
 $router->get('/posts', 'PostController@list');
 
+$router->get('/register', 'UserController@showRegister');
+$router->post('/register', 'UserController@register');
+
 $router->get('/test-db', function() {
     try {
         $pdo = Database::getConnection();

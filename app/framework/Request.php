@@ -73,5 +73,16 @@ class Request
     {
         return array_merge($this->params, $this->data);
     }
+
+    // récup une entrée, que ce soit en JSON ou en formulaire. 
+    // voir si possible d'unifier getJsonData et input
+    public function input(string $key, $default = null)
+    {
+        if ($this->isJson()) {
+            $jsonData = $this->getJsonData();
+            return $jsonData[$key] ?? $default;
+        }
+        return $this->get($key, $default);
+    }
 }
 

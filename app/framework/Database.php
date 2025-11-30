@@ -42,7 +42,7 @@ class Database
         $placeholders = array_map(fn($col) => ":$col", $columns);
 
         $sql = sprintf(
-            "INSERT INTO %s (%s) VALUES (%s) RETURNING id",
+            "INSERT INTO %s (%s) VALUES (%s)",
             $table,
             implode(', ', $columns),
             implode(', ', $placeholders)
@@ -51,7 +51,6 @@ class Database
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($data);
-            $result = $stmt->fetch();
             return (int) $pdo->lastInsertId();
         } catch (PDOException $e) {
             error_log("Database create error: " . $e->getMessage());
