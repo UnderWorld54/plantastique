@@ -13,9 +13,14 @@
             <h1><?= $this->escape($siteTitle ?? 'Plantastique ') ?></h1>
             <nav>
                 <a href="/">Accueil</a>
-                <a href="/posts">Posts</a>
-                <a href="/users">Utilisateurs</a>
-                <a href="/register">Inscription</a>
+                <a href="/plants">Plantes</a>
+                <a href="/plants/create">Ajouter une plante</a>
+                <?php if (Framework\Auth::check()): ?>
+                    <a href="/logout">Déconnexion</a>
+                <?php else: ?>
+                    <a href="/login">Connexion</a>
+                    <a href="/register">Inscription</a>
+                <?php endif; ?>
             </nav>
         </header>
         
